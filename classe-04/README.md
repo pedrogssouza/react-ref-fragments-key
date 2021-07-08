@@ -5,21 +5,24 @@
 ### Contador configurável
 
 ```jsx
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 
 export default function App() {
   const [count, setCount] = useState(0);
   const [step, setStep] = useState(1);
   const [delaySegundos, setDelaySegundos] = useState(1);
+  const stepCallbackRef = useRef();
+
+  stepCallbackRef.current = () => setCount((c) => c + step);
 
   useEffect(() => {
     const intervalId = setInterval(
-        () => setCount((c) => c + step),
-        delaySegundos * 1000
+      () => stepCallbackRef.current(),
+      delaySegundos * 1000
     );
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [delaySegundos]);
 
   return (
     <div>

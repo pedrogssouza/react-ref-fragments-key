@@ -5,48 +5,49 @@
 ### Fragmentos
 
 ```jsx
+const { Fragment } = require("react");
 const glossario = [
   {
     termo: "HTML",
     definicao:
-      "Linguagem de marcação responsável por definir a estrutura de uma página web"
+      "Linguagem de marcação responsável por definir a estrutura de uma página web",
   },
   {
     termo: "CSS",
-    definicao: "Linguagem responsável por definir o estilo de uma página web"
+    definicao: "Linguagem responsável por definir o estilo de uma página web",
   },
   {
     termo: "Javascript",
     definicao:
-      "Linguagem de programação responsável por ditar o comportamento de uma página web"
-  }
+      "Linguagem de programação responsável por ditar o comportamento de uma página web",
+  },
 ];
 
 export default function App() {
-    const [mostrando, setMostrando] = useState(false);
+  const [mostrando, setMostrando] = useState(false);
 
-    return (
-        <div>
-            <h1>Meu app</h1>
-            <button>{mostrando ? "Fechar" : "Abrir"} menu</button>
+  return (
+    <div>
+      <h1>Meu app</h1>
+      <button>{mostrando ? "Fechar" : "Abrir"} menu</button>
 
-            {mostrando && (
-                <div className="remover-div">
-                    <button>Adicionar entrada</button>
-                    <button>Remover entrada</button>
-                </div>
-            )}
+      {mostrando && (
+        <>
+          <button>Adicionar entrada</button>
+          <button>Remover entrada</button>
+        </>
+      )}
 
-            <dl>
-                {glossario.map(entrada => (
-                    <div className="remover-div">
-                        <dt>{entrada.termo}</dt>
-                        <dd>{entrada.definicao}</dd>
-                    </div>
-                ))}
-            </dl>
-        </div>
-    );
+      <dl>
+        {glossario.map((entrada) => (
+          <Fragment key={entrada.termo}>
+            <dt>{entrada.termo}</dt>
+            <dd>{entrada.definicao}</dd>
+          </Fragment>
+        ))}
+      </dl>
+    </div>
+  );
 }
 ```
 
